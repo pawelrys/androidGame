@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">A co to?</string>
+    <string name="startText">Hej!</string>
+    <string name="startSecondText">Zaczynamy zabawę!</string>
+    <string name="button">Button</string>
+    <string name="startButton">Szybki start</string>
+    <string name="startTeamButton">Zagraj z przyjaciółmi</string>
+    <string name="settingsButton">Ustawienia</string>
+    <string name="dodajSwojąPiosenkę">Dodaj swoją piosenkę</string>
+    <string name="endButton">Koniec gry</string>
+
+</resources>
