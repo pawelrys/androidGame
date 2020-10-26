@@ -30,17 +30,8 @@ class startClass : AppCompatActivity() {
                 startSecondTitle.text = ""
                 val intent = Intent(this, menuClass::class.java)
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right)
             }, 4000)
         }, 4000)
-
-//        Handler().postDelayed({
-//            val intent = Intent(this, startSecondClass::class.java)
-//            startActivity(intent);
-//        }, 3000);
-//        button.setOnClickListener{
-//            val intent = Intent(this, startSecondClass::class.java);
-//            startActivity(intent);
-//        }
-
     }
 }

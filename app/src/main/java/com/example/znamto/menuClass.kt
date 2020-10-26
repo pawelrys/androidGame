@@ -1,20 +1,24 @@
 package com.example.znamto
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.TextView
-import org.w3c.dom.Text
-import kotlinx.android.synthetic.main.start_page.*
+import androidx.appcompat.app.AppCompatActivity
 
 class menuClass : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.menu_page)
+    }
+
+    override fun finish() {
+        minimizeApp()
+    }
+
+    fun minimizeApp() {
+        val startMain = Intent(Intent.ACTION_MAIN)
+        startMain.addCategory(Intent.CATEGORY_HOME)
+        startMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(startMain)
     }
 }
