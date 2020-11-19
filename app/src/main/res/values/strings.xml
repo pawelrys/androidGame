@@ -8,5 +8,10 @@
     <string name="settingsButton">Ustawienia</string>
     <string name="dodajSwojąPiosenkę">Dodaj swoją piosenkę</string>
     <string name="endButton">Koniec gry</string>
+    <string name="addTitle">Tytuł</string>
+    <string name="addAuthor">Wykonawca</string>
+    <string name="addCategory">Gatunek</string>
+    <string name="addLanguage">Język</string>
+    <string name="addSongButton">Dodaj Piosenkę</string>
 
 </resources>

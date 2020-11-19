@@ -2,6 +2,7 @@ package com.example.znamto
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
 class menuClass : AppCompatActivity() {
@@ -9,7 +10,20 @@ class menuClass : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.menu_page)
+
+
+
+        val fastStartButton = findViewById<Button>(R.id.fastStartButton)
+        fastStartButton.setOnClickListener{
+            val intent = Intent(this, fastStart::class.java)
+            startActivity(intent)
+        }
     }
+
+
+
+
+
 
     override fun finish() {
         minimizeApp()

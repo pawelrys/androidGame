@@ -12,13 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="60dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <Button
                 android:textSize="30sp"
-                android:id="@+id/ladderButton"
+                android:id="@+id/fastStartButton"
                 android:textColor="@android:color/white"
                 android:typeface="serif"
                 android:layout_width="match_parent"
@@ -34,7 +34,7 @@
 
             <Button
                 android:textSize="30sp"
-                android:id="@+id/classificationButton"
+                android:id="@+id/startWithFriendsButton"
                 android:layout_width="match_parent"
                 android:textColor="@android:color/white"
                 android:typeface="serif"
@@ -51,7 +51,7 @@
 
             <Button
                 android:textSize="30sp"
-                android:id="@+id/setMatchButton"
+                android:id="@+id/settingsButton"
                 android:layout_width="match_parent"
                 android:textColor="@android:color/white"
                 android:typeface="serif"
@@ -68,7 +68,7 @@
 
             <Button
                 android:textSize="30sp"
-                android:id="@+id/addPlayerButton"
+                android:id="@+id/addNewSongButton"
                 android:layout_width="match_parent"
                 android:textColor="@android:color/white"
                 android:typeface="serif"
