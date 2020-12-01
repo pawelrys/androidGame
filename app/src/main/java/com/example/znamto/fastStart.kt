@@ -4,31 +4,49 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 
 class fastStart : AppCompatActivity() {
-//    val db = DataBase.getInstance(fastStart.applicationContext());
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        onWindowFocusChanged(true)
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.fast_start)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
     }
+    val db: DataBase? = DataBase(this).getInstance(this)
 
-    init {
-        instance = this
+    //add hide navigation bar
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) hideSystemUI()
     }
 
-    companion object {
-
-        private var instance: fastStart? = null
-        fun applicationContext() : Context {
-            return instance!!.applicationContext
+    private fun hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    // Set the content to appear under the system bars so that the
+                    // content doesn't resize when the system bars hide and show.
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    // Hide the nav bar and status bar
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN)
         }
     }
 
-    fun applicationContext() : Context {
-        return instance!!.applicationContext
+    // Shows the system bars by removing all the flags
+// except for the ones that make the content appear under the system bars.
+    private fun showSystemUI() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
+
+
 
 }

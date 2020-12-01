@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.NoTitleBar"
     tools:context=".startClass"
-    android:background="@drawable/back1">
+    android:background="@drawable/back1"
+    android:id="@+id/startPage">
 
     <TextView
         android:id="@+id/startText"

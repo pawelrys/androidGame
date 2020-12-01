@@ -9,3 +9,4 @@ class playWithFriends : AppCompatActivity() {
         setContentView(R.layout.play_with_friends)
     }
 }
+

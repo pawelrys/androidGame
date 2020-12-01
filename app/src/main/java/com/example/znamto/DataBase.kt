@@ -13,8 +13,15 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "MYDATABASE", null,
     val authorTable = "Author"
     val categoryTable = "Category"
     val languageTable = "Language"
-    val db = this.writableDatabase
+    var instance: DataBase? = null
 
+    //Singleton
+    fun getInstance(context: Context): DataBase? {
+        if(instance == null){
+            instance = DataBase(context)
+        }
+        return instance
+    }
 
     override fun onCreate(db: SQLiteDatabase) {
         val tableOfSongs = ("CREATE TABLE " +
@@ -31,30 +38,19 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "MYDATABASE", null,
         onCreate(db)
     }
 
-    fun addSong(title: String, author: String, category: String, language: String) {
-        val values = ContentValues()
-        values.put(titleTable, title)
-        values.put(authorTable, author)
-        values.put(categoryTable, category)
-        values.put(languageTable, language)
-        db.insert(tableName, null, values)
-        db.close()
-    }
-
-    fun getAllSongs(): Cursor? {
-        return db.rawQuery("SELECT * FROM $tableName", null)
-    }
-
-    companion object {
-        private var instance: DataBase? = null
-        @Synchronized
-        public fun getInstance(ctx: Context): DataBase {
-            if (instance == null) {
-                instance = DataBase(ctx.applicationContext)
-            }
-            return instance!!
-        }
-    }
+//    public fun addSong(title: String, author: String, category: String, language: String) {
+//        val values = ContentValues()
+//        values.put(titleTable, title)
+//        values.put(authorTable, author)
+//        values.put(categoryTable, category)
+//        values.put(languageTable, language)
+//        db.insert(tableName, null, values)
+//        db.close()
+//    }
+//
+//    public fun getAllSongs(): Cursor? {
+//        return db.rawQuery("SELECT * FROM $tableName", null)
+//    }
 }
 
 

@@ -12,13 +12,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity android:name=".addNewSong" />
         <activity android:name=".settings" />
         <activity android:name=".playWithFriends" />
         <activity android:name=".menuClass" />
-        <activity android:name=".fastStart" android:screenOrientation="landscape"  />
-        <activity android:name=".startClass" >
+        <activity android:name=".fastStart"/>
+        <activity android:name=".startClass">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
