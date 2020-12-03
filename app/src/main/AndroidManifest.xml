@@ -17,7 +17,7 @@
         <activity android:name=".settings" />
         <activity android:name=".playWithFriends" />
         <activity android:name=".menuClass" />
-        <activity android:name=".fastStart"/>
+        <activity android:name=".StartPlay"/>
         <activity android:name=".startClass">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -3,23 +3,40 @@ package com.example.znamto
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.text.Layout
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 
+@Suppress("DEPRECATION")
 class menuClass : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         onWindowFocusChanged(true)
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         setContentView(R.layout.menu_page)
+        val overlay = findViewById<ConstraintLayout>(R.id.menuId)
 
+        overlay.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_FULLSCREEN
         val fastStartButton = findViewById<Button>(R.id.fastStartButton)
         fastStartButton.setOnClickListener{
-            val intent = Intent(this, fastStart::class.java)
+            val intent = Intent(this, StartPlay::class.java)
             startActivity(intent)
+
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hideSystemUI()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        hideSystemUI()
     }
 
     //disable back from menu to start
@@ -36,8 +53,8 @@ class menuClass : AppCompatActivity() {
 
     //add hide navigation bar
     override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) hideSystemUI()
+        super.onWindowFocusChanged(true)
+        hideSystemUI()
     }
 
     private fun hideSystemUI() {

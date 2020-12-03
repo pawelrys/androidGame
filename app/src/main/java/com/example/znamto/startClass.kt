@@ -13,13 +13,12 @@ import androidx.viewpager.widget.ViewPager
 import org.w3c.dom.Text
 import kotlinx.android.synthetic.main.start_page.*
 import kotlinx.coroutines.*
-import org.jetbrains.anko.ScreenSize
 
 
 @Suppress("DEPRECATION")
 class startClass : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        var isClick : Boolean = false
+//        addStartSongs()
         onWindowFocusChanged(true)
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -37,10 +36,10 @@ class startClass : AppCompatActivity() {
             Handler().postDelayed({
                 startSecondTitle.text = ""
                 val intent = Intent(this, menuClass::class.java)
-                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 startActivity(intent)
-            }, 2000)
-        }, 2000)
+            }, 20)
+        }, 20)
 
 
     }
@@ -74,5 +73,55 @@ class startClass : AppCompatActivity() {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+    }
+
+    fun addStartSongs(){
+        val a1 = Song("Wulkan", "Volver", "POP", "Polski")
+        val a2 = Song("Chce", "Volver", "POP", "Polski")
+        val a3 = Song("Każda Noc, Każdy Dzień", "Volver", "POP", "Polski")
+        val a4 = Song("Z tobą mam sen", "Volver", "POP", "Polski")
+        val a5 = Song("Idę na plaże", "Video", "POP", "Polski")
+        val a6 = Song("Fantastyczny Lot", "Video", "POP", "Polski")
+        val a7 = Song("Środa Czwartek", "Video", "POP", "Polski")
+        val a8 = Song("To Twoja Win", "Video", "POP", "Polski")
+        val a9 = Song("Dwie Bajki", "Doda", "POP", "Polski")
+        val a10 = Song("Dżaga", "Doda", "POP", "Polski")
+        val a11 = Song("Nie daj się", "Doda", "POP", "Polski")
+        val a12 = Song("Chodź przytul przebacz", "Andrzej Piaseczny", "POP", "Polski")
+        val a13 = Song("Z Dwojga ciał", "Andrzej Piaseczny", "POP", "Polski")
+        val a14 = Song("Moc", "Gosia Andrzejewicz", "POP", "Polski")
+        val a15 = Song("Doceń to", "Gosia Andrzejewicz", "POP", "Polski")
+        val a16 = Song("Obiecaj Mi", "Gosia Andrzejewicz", "POP", "Polski")
+        val a17 = Song("Pozwól Żyć", "Gosia Andrzejewicz", "POP", "Polski")
+        val a18 = Song("Siła Marzeń", "Gosia Andrzejewicz", "POP", "Polski")
+        val a19 = Song("Karuzela", "Sylwia Grzeszczak", "POP", "Polski")
+        val a20 = Song("Pożyczony", "Sylwia Grzeszczak", "POP", "Polski")
+        val a21 = Song("Mijamy się", "Sylwia Grzeszczak", "POP", "Polski")
+        val a22 = Song("Sen o przeszłości", "Sylwia Grzeszczak", "POP", "Polski")
+
+        var db : DataBase = DataBase(this).getInstance(this)
+
+        db.addSong(a1)
+        db.addSong(a2)
+        db.addSong(a3)
+        db.addSong(a4)
+        db.addSong(a5)
+        db.addSong(a6)
+        db.addSong(a7)
+        db.addSong(a8)
+        db.addSong(a9)
+        db.addSong(a10)
+        db.addSong(a11)
+        db.addSong(a12)
+        db.addSong(a13)
+        db.addSong(a14)
+        db.addSong(a15)
+        db.addSong(a16)
+        db.addSong(a17)
+        db.addSong(a18)
+        db.addSong(a19)
+        db.addSong(a20)
+        db.addSong(a21)
+        db.addSong(a22)
     }
 }

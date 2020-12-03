@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.NoTitleBar"
     tools:context=".startClass"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    android:id="@+id/menuId">
+
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -84,4 +87,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
     </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

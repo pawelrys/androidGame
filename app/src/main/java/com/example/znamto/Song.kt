@@ -1,12 +1,15 @@
 package com.example.znamto
 
 //Prototyp
-open class Song(id: Int, title: String, author: String, category: String, language: String) : Cloneable{
-    private var idSong:Int = id
-    private var titleSong:String? = title
-    private var authorSong:String? = author
-    private var categorySong:String? = category
-    private var languageSong:String? = language
+open class Song(title: String, author: String, category: String, language: String) : Cloneable{
+    var titleSong:String? = title
+        get() = field
+    var authorSong:String? = author
+        get() = field
+    var categorySong:String? = category
+        get() = field
+    var languageSong:String? = language
+        get() = field
 
     private fun Song(): Song {
         return this
@@ -45,6 +48,10 @@ class SongsListCollection {
 
         override fun next(): Song {
             return collection.songs[index++]
+        }
+
+        fun isNull() : Boolean {
+            return index >= collection.songs.size
         }
     }
 }

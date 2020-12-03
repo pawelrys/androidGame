@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import kotlin.random.Random
 
 class DataBase(context: Context) : SQLiteOpenHelper(context, "MYDATABASE", null, 1) {
     val tableName = "Songs"
@@ -16,11 +17,11 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "MYDATABASE", null,
     var instance: DataBase? = null
 
     //Singleton
-    fun getInstance(context: Context): DataBase? {
+    fun getInstance(context: Context): DataBase {
         if(instance == null){
             instance = DataBase(context)
         }
-        return instance
+        return instance as DataBase
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -38,19 +39,27 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "MYDATABASE", null,
         onCreate(db)
     }
 
-//    public fun addSong(title: String, author: String, category: String, language: String) {
-//        val values = ContentValues()
-//        values.put(titleTable, title)
-//        values.put(authorTable, author)
-//        values.put(categoryTable, category)
-//        values.put(languageTable, language)
-//        db.insert(tableName, null, values)
-//        db.close()
-//    }
-//
-//    public fun getAllSongs(): Cursor? {
-//        return db.rawQuery("SELECT * FROM $tableName", null)
-//    }
+    fun addSong(song : Song) {
+        val db = writableDatabase
+        val values = ContentValues()
+        values.put(titleTable, song.titleSong)
+        values.put(authorTable, song.authorSong)
+        values.put(categoryTable, song.categorySong)
+        values.put(languageTable, song.languageSong)
+        db.insert(tableName, null, values)
+        db.close()
+    }
+
+    fun getRandomSong() : Song {
+        val allSongs = getAllSongs()
+        allSongs.moveToPosition((0 until (allSongs.count)).random())
+        return Song(allSongs.getString(1),allSongs.getString(2),allSongs.getString(3),allSongs.getString(4))
+    }
+
+    public fun getAllSongs(): Cursor {
+        val db = writableDatabase
+        return db.rawQuery("SELECT * FROM $tableName", null)
+    }
 }
 
 

@@ -2,7 +2,7 @@ package com.example.znamto
 
 //Kompozyt
 class Composite {
-    private val Teams = ArrayList<Team>()
+    val Teams = ArrayList<Team>()
 
     public fun add(team : Team){
         this.Teams.add(team)

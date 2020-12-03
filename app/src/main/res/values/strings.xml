@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">A co to?</string>
     <string name="startText">Hej!</string>
-    <string name="startSecondText">Zaczynamy zabawę!</string>
+    <string name="startPlayText">Startujemy!</string>
     <string name="button">Button</string>
     <string name="startButton">Szybki start</string>
     <string name="startTeamButton">Zagraj z przyjaciółmi</string>
@@ -9,7 +9,7 @@
     <string name="dodajSwojąPiosenkę">Dodaj swoją piosenkę</string>
     <string name="endButton">Koniec gry</string>
     <string name="addTitle">Tytuł</string>
-    <string name="addAuthor">Wykonawca</string>
+    <string name="addAuthor">Wykonawca/Zespół</string>
     <string name="addCategory">Gatunek</string>
     <string name="addLanguage">Język</string>
     <string name="addSongButton">Dodaj Piosenkę</string>

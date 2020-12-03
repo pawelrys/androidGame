@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:typeface="serif"
         android:gravity="center"
-        android:text="@string/startSecondText"
+        android:text="@string/startText"
         android:textColor="@android:color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
