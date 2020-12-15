@@ -1,18 +1,23 @@
 package com.example.znamto
 
 //Prototyp
-open class Song(title: String, author: String, category: String, language: String) : Cloneable{
-    var titleSong:String? = title
+//Most (Bridge) (Song posiada Authora)
+open class Song(title: String, author: Author, category: String, language: String) : Cloneable{
+    var titleSong:String = title
         get() = field
-    var authorSong:String? = author
+    var authorSong:Author = author
         get() = field
-    var categorySong:String? = category
+    var categorySong:String = category
         get() = field
-    var languageSong:String? = language
+    var languageSong:String = language
         get() = field
 
     private fun Song(): Song {
         return this
+    }
+
+    fun getTitle() : String {
+        return titleSong
     }
 
     public override fun clone(): Song {
@@ -30,10 +35,10 @@ interface Iterator{
     fun next() : Song
 }
 
-class SongsListCollection {
-    private val songs = ArrayList<Song>()
+class SongsListCollection (song : ArrayList<Song> = ArrayList<Song>()){
+    private val songs = song
 
-    fun add(song : Song){
+    fun add(song : Song) {
         songs.add(song)
     }
 

@@ -1,6 +1,5 @@
 package com.example.znamto
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -9,26 +8,34 @@ import android.os.Handler
 import android.view.View
 import android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.start_play.*
+import org.w3c.dom.Text
 
 
 @Suppress("DEPRECATION")
 class StartPlay : AppCompatActivity() {
+    companion object {
+        var timeToSong : Long = 8000
+        var howManySongsForRound = 10
+        var knowSongs : Int = 0
+        var allSongs : Int = 0
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
         onWindowFocusChanged(true)
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.start_play)
+
+
         val songsToShow = randomSongs()
         val iterator = songsToShow.createIterator()
-        super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
-        setContentView(R.layout.start_play)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         val animation = AnimationUtils.loadAnimation(this, R.anim.fadein)
         val startPlayText = findViewById<TextView>(R.id.startPlayText)
-
         Handler().postDelayed({
             startPlayText.text = "3"
             startPlayText.startAnimation(animation)
@@ -41,6 +48,8 @@ class StartPlay : AppCompatActivity() {
                     Handler().postDelayed({
                         startPlayText.text = "Go!"
                         startPlayText.startAnimation(animation)
+                        knowSongs= 0
+                        allSongs= 0
                         showSong(iterator)
                         Handler().postDelayed({
                         }, 500)
@@ -51,11 +60,8 @@ class StartPlay : AppCompatActivity() {
     }
 
     fun randomSongs() : SongsListCollection {
-        val songs = SongsListCollection()
         val db = DataBase(this).getInstance(this)
-        repeat(3) {
-            songs.add(db.getRandomSong())
-        }
+        val songs = SongsListCollection(db.getManyRandomSong(howManySongsForRound))
         return songs
     }
 
@@ -67,17 +73,18 @@ class StartPlay : AppCompatActivity() {
             val startPlayAuthorText = findViewById<TextView>(R.id.startPlayAuthorText)
             startPlayText.text = song.titleSong
             startPlayText.startAnimation(animation)
-            startPlayAuthorText.text = song.authorSong
+            startPlayAuthorText.text = Adapter.getAuthor(song.authorSong)
             startPlayAuthorText.startAnimation(animation)
-            val screen = findViewById<ConstraintLayout>(R.id.startPlayScreen)
+            val howManySong = findViewById<TextView>(R.id.howManyKnowSong)
+            val know = findViewById<LinearLayout>(R.id.know)
+            val dontKnow = findViewById<LinearLayout>(R.id.dontKnow)
 
-            val timer: CountDownTimer = object : CountDownTimer(8000, 1000) {
+            val timer: CountDownTimer = object : CountDownTimer(timeToSong, 1000) {
                 override fun onFinish() {
-//                    Toast.makeText(applicationContext, "Siema", Toast.LENGTH_SHORT).show()
                     cancel()
                     Handler().postDelayed({
                         showSong(iterator)
-                    }, 100)
+                    }, 500)
                 }
 
                 override fun onTick(millisUntilFinished: Long) {
@@ -85,21 +92,33 @@ class StartPlay : AppCompatActivity() {
                 }
             }.start()
 
-            screen.setOnClickListener {
+//            screen.setOnClickListener {
+//                timer.onFinish()
+//            }
+
+            know.setOnClickListener {
+                knowSongs++
+                allSongs++
+                startPlayText.text = "Brawo!"
+                howManySong.text = ("$knowSongs/$allSongs")
+                timer.onFinish()
+            }
+
+            dontKnow.setOnClickListener {
+                allSongs++
+                startPlayText.text = "Następnym razem się uda!"
+                howManySong.text = ("$knowSongs/$allSongs")
                 timer.onFinish()
             }
         }
         else {
-            val intent = Intent(this, menuClass::class.java)
+            val intent = Intent(this, MenuClass::class.java)
             overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             startActivity(intent)
-            //Toast.makeText(applicationContext, "Siema", Toast.LENGTH_SHORT).show()
-
         }
     }
 
-
-    //add hide navigation bar
+//    //add hide navigation bar
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) hideSystemUI()
@@ -123,7 +142,7 @@ class StartPlay : AppCompatActivity() {
     }
 
     // Shows the system bars by removing all the flags
-// except for the ones that make the content appear under the system bars.
+    // except for the ones that make the content appear under the system bars.
     private fun showSystemUI() {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

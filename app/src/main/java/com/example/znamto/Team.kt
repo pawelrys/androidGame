@@ -1,6 +1,6 @@
 package com.example.znamto
 
-//Metoda Wytwórcza
+//Metoda Wytwórcza (Factory Method)
 open class Team() {
     var points = 0
         get() = field

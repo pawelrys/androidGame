@@ -13,5 +13,20 @@
     <string name="addCategory">Gatunek</string>
     <string name="addLanguage">Język</string>
     <string name="addSongButton">Dodaj Piosenkę</string>
+    <string name="timeSongText">Czas na piosenkę (sekundy):</string>
+    <string name="timeSongEdit">Domyślnie 90</string>
+    <string name="filterCategoryString">Filtrowanie gatunków piosenek</string>
+    <string name="filterLanguageString">Filtrowanie języków piosenek</string>
+    <string name="filterAuthorString">Filtrowanie autorów piosenek</string>
+    <string name="filterTitleString">Filtrowanie tytułów piosenek</string>
+    <string name="timeSongButton">Ustaw czas</string>
+    <string name="howManySongButton">Ustaw liczbe piosenek</string>
+    <string name="howManySongEdit">Domyślnie 10</string>
+    <string name="howManySongText">Liczba piosenek na rundę:</string>
+    <string name="showSong">Pokaż wszystkie piosenki</string>
+    <string name="songsTitle">Tytuł</string>
+    <string name="songAuthor">Wykonawca</string>
+    <string name="songCategory">Gatunek</string>
+    <string name="songLanguage">Język</string>
 
 </resources>

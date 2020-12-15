@@ -5,24 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
 import android.widget.TextView
-import androidx.viewpager.widget.ViewPager
-import org.w3c.dom.Text
-import kotlinx.android.synthetic.main.start_page.*
-import kotlinx.coroutines.*
 
 
 @Suppress("DEPRECATION")
 class startClass : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-//        addStartSongs()
-        onWindowFocusChanged(true)
-        super.onCreate(savedInstanceState)
         supportActionBar?.hide()
+        onWindowFocusChanged(true)
+
+//        addStartSongs()
+
+
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.start_page)
+
         val startTitle = findViewById<TextView>(R.id.startText)
         val startSecondTitle = findViewById<TextView>(R.id.startSecondText)
         startSecondTitle.text = ""
@@ -35,7 +33,7 @@ class startClass : AppCompatActivity() {
             startSecondTitle.startAnimation(b)
             Handler().postDelayed({
                 startSecondTitle.text = ""
-                val intent = Intent(this, menuClass::class.java)
+                val intent = Intent(this, MenuClass::class.java)
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 startActivity(intent)
             }, 20)
@@ -75,29 +73,34 @@ class startClass : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 
+
+
+
+
+
     fun addStartSongs(){
-        val a1 = Song("Wulkan", "Volver", "POP", "Polski")
-        val a2 = Song("Chce", "Volver", "POP", "Polski")
-        val a3 = Song("Każda Noc, Każdy Dzień", "Volver", "POP", "Polski")
-        val a4 = Song("Z tobą mam sen", "Volver", "POP", "Polski")
-        val a5 = Song("Idę na plaże", "Video", "POP", "Polski")
-        val a6 = Song("Fantastyczny Lot", "Video", "POP", "Polski")
-        val a7 = Song("Środa Czwartek", "Video", "POP", "Polski")
-        val a8 = Song("To Twoja Win", "Video", "POP", "Polski")
-        val a9 = Song("Dwie Bajki", "Doda", "POP", "Polski")
-        val a10 = Song("Dżaga", "Doda", "POP", "Polski")
-        val a11 = Song("Nie daj się", "Doda", "POP", "Polski")
-        val a12 = Song("Chodź przytul przebacz", "Andrzej Piaseczny", "POP", "Polski")
-        val a13 = Song("Z Dwojga ciał", "Andrzej Piaseczny", "POP", "Polski")
-        val a14 = Song("Moc", "Gosia Andrzejewicz", "POP", "Polski")
-        val a15 = Song("Doceń to", "Gosia Andrzejewicz", "POP", "Polski")
-        val a16 = Song("Obiecaj Mi", "Gosia Andrzejewicz", "POP", "Polski")
-        val a17 = Song("Pozwól Żyć", "Gosia Andrzejewicz", "POP", "Polski")
-        val a18 = Song("Siła Marzeń", "Gosia Andrzejewicz", "POP", "Polski")
-        val a19 = Song("Karuzela", "Sylwia Grzeszczak", "POP", "Polski")
-        val a20 = Song("Pożyczony", "Sylwia Grzeszczak", "POP", "Polski")
-        val a21 = Song("Mijamy się", "Sylwia Grzeszczak", "POP", "Polski")
-        val a22 = Song("Sen o przeszłości", "Sylwia Grzeszczak", "POP", "Polski")
+        val a1 = Song("Wulkan", Adapter.createAuthor("Volver"), "POP", "Polski")
+        val a2 = Song("Chce", Adapter.createAuthor("Volver"), "POP", "Polski")
+        val a3 = Song("Każda Noc, Każdy Dzień", Adapter.createAuthor("Volver"), "POP", "Polski")
+        val a4 = Song("Z tobą mam sen", Adapter.createAuthor("Volver"), "POP", "Polski")
+        val a5 = Song("Idę na plaże", Adapter.createAuthor("Video"), "POP", "Polski")
+        val a6 = Song("Fantastyczny Lot", Adapter.createAuthor("Video"), "POP", "Polski")
+        val a7 = Song("Środa Czwartek", Adapter.createAuthor("Video"), "POP", "Polski")
+        val a8 = Song("To Twoja Wina", Adapter.createAuthor("Video"), "POP", "Polski")
+        val a9 = Song("Dwie Bajki", Adapter.createAuthor("Doda"), "POP", "Polski")
+        val a10 = Song("Dżaga", Adapter.createAuthor("Doda"), "POP", "Polski")
+        val a11 = Song("Nie daj się", Adapter.createAuthor("Doda"), "POP", "Polski")
+        val a12 = Song("Chodź przytul przebacz", Adapter.createAuthor("Andrzej Piaseczny"), "POP", "Polski")
+        val a13 = Song("Z Dwojga ciał", Adapter.createAuthor("Andrzej Piaseczny"), "POP", "Polski")
+        val a14 = Song("Moc", Adapter.createAuthor("Gosia Andrzejewicz"), "POP", "Polski")
+        val a15 = Song("Doceń to", Adapter.createAuthor("Gosia Andrzejewicz"), "POP", "Polski")
+        val a16 = Song("Obiecaj Mi", Adapter.createAuthor("Gosia Andrzejewicz"), "POP", "Polski")
+        val a17 = Song("Pozwól Żyć", Adapter.createAuthor("Gosia Andrzejewicz"), "POP", "Polski")
+        val a18 = Song("Siła Marzeń", Adapter.createAuthor("Gosia Andrzejewicz"), "POP", "Polski")
+        val a19 = Song("Karuzela", Adapter.createAuthor("Sylwia Grzeszczak"), "POP", "Polski")
+        val a20 = Song("Pożyczony", Adapter.createAuthor("Sylwia Grzeszczak"), "POP", "Polski")
+        val a21 = Song("Mijamy się", Adapter.createAuthor("Sylwia Grzeszczak"), "POP", "Polski")
+        val a22 = Song("Sen o przeszłości", Adapter.createAuthor("Sylwia Grzeszczak"), "POP", "Polski")
 
         var db : DataBase = DataBase(this).getInstance(this)
 

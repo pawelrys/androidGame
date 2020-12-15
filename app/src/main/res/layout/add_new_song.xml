@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.NoTitleBar"
-    tools:context=".addNewSong"
+    tools:context=".AddNewSong"
     android:background="@drawable/background">
 
     <LinearLayout
@@ -47,7 +47,7 @@
             android:ems="10"
             android:gravity="center"
             android:hint="@string/addCategory"
-            android:inputType="number" />
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/addLanguage"
@@ -59,7 +59,7 @@
             android:ems="10"
             android:gravity="center"
             android:hint="@string/addLanguage"
-            android:inputType="number" />
+            android:inputType="text" />
 
         <Button
             android:id="@+id/addSongButton"

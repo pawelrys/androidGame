@@ -5,83 +5,151 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.NoTitleBar"
-    tools:context=".settings"
+    tools:context=".Settings"
     android:background="@drawable/background">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <Button
-                android:textSize="30sp"
-                android:id="@+id/ladderButton"
-                android:textColor="@android:color/white"
-                android:typeface="serif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:padding="30dp"
-                android:background="#30999999"
-                android:layout_marginEnd="80dp"
-                android:text="@string/startButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            android:layout_marginStart="10dp">
 
-            <Button
-                android:textSize="30sp"
-                android:id="@+id/classificationButton"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:textColor="@android:color/white"
-                android:typeface="serif"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:background="#30999999"
-                android:layout_marginTop="50dp"
-                android:padding="30dp"
-                android:layout_marginEnd="80dp"
-                android:text="@string/startTeamButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="30dp">
 
-            <Button
-                android:textSize="30sp"
-                android:id="@+id/setMatchButton"
-                android:layout_width="match_parent"
-                android:textColor="@android:color/white"
-                android:typeface="serif"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:background="#30999999"
-                android:layout_marginTop="50dp"
-                android:padding="30dp"
-                android:layout_marginEnd="80dp"
-                android:text="@string/settingsButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/timeSongText"
+                    android:layout_width="170sp"
+                    android:layout_height="90sp"
+                    android:text="@string/timeSongText"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:layout_marginRight="4sp"
+                    android:layout_marginEnd="4sp" />
 
-            <Button
-                android:textSize="30sp"
-                android:id="@+id/addPlayerButton"
+                <EditText
+                    android:id="@+id/timeSongEdit"
+                    android:layout_width="120sp"
+                    android:layout_height="70sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:hint="@string/timeSongEdit"
+                    android:inputType="numberDecimal"
+                    android:layout_marginRight="10sp"
+                    android:layout_marginEnd="10sp" />
+
+                <Button
+                    android:id="@+id/timeSongButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="70sp"
+                    android:text="@string/timeSongButton"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:textColor="@android:color/white"
-                android:typeface="serif"
-                android:background="#30999999"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="50dp"
-                android:padding="30dp"
-                android:layout_marginEnd="80dp"
-                android:text="@string/dodajSwojąPiosenkę"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="30dp">
+
+                <TextView
+                    android:id="@+id/howManySongText"
+                    android:layout_width="170sp"
+                    android:layout_height="90sp"
+                    android:text="@string/howManySongText"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:layout_marginRight="4sp"
+                    android:layout_marginEnd="4sp" />
+
+                <EditText
+                    android:id="@+id/howManySongEdit"
+                    android:layout_width="120sp"
+                    android:layout_height="70sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:text=""
+                    android:hint="@string/howManySongEdit"
+                    android:inputType="numberDecimal"
+                    android:layout_marginRight="10sp"
+                    android:layout_marginEnd="10sp" />
+
+                <Button
+                    android:id="@+id/howManySongButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="70sp"
+                    android:text="@string/howManySongButton"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="40dp">
+
+                <Button
+                    android:id="@+id/settingsCategoryButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filterCategoryString" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="40dp">
+                <Button
+                    android:id="@+id/settingsLanguageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filterLanguageString" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="40dp">
+                <Button
+                    android:id="@+id/settingsAuthorButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filterAuthorString" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="40dp">
+                <Button
+                    android:id="@+id/settingsTitleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filterTitleString" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="40dp">
+                <Button
+                    android:id="@+id/settingsShowSongs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/showSong" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
