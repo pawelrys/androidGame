@@ -159,17 +159,10 @@ class DataBase(context: Context) : SQLiteOpenHelper(context, "MYDATABASE", null,
         val success1 = db.update(tableName, values, idToChange, arrayOf());
     }
 
-
-
-
-
-
-
-
-
-
-
-
+    fun getCount() : Int {
+        val count = getAllSongs()
+        return count.count
+    }
 
     fun addAndGetAuthorId(author : Author) : Int {
         val authors = getAllAuthor()

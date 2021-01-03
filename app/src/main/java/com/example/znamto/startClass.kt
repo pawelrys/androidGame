@@ -14,8 +14,8 @@ class startClass : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.hide()
         onWindowFocusChanged(true)
-
-//        addStartSongs()
+        val db = DataBase(this).getInstance(this)
+        if(db.getCount() == 0) addStartSongs()
 
 
         super.onCreate(savedInstanceState)
@@ -36,8 +36,8 @@ class startClass : AppCompatActivity() {
                 val intent = Intent(this, MenuClass::class.java)
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 startActivity(intent)
-            }, 20)
-        }, 20)
+            }, 2000)
+        }, 2000)
 
 
     }
@@ -102,7 +102,8 @@ class startClass : AppCompatActivity() {
         val a21 = Song("Mijamy się", Adapter.createAuthor("Sylwia Grzeszczak"), "POP", "Polski")
         val a22 = Song("Sen o przeszłości", Adapter.createAuthor("Sylwia Grzeszczak"), "POP", "Polski")
 
-        var db : DataBase = DataBase(this).getInstance(this)
+        val db = DataBase(this).getInstance(this)
+
 
         db.addSong(a1)
         db.addSong(a2)

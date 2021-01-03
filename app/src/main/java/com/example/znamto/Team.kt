@@ -10,7 +10,7 @@ open class Team() {
 }
 
 public class Player(nick : String) : Team() {
-    private var nickPlayer = nick
+    var nickPlayer = nick
         get() = field
 }
 

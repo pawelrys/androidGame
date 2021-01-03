@@ -2,13 +2,23 @@ package com.example.znamto
 
 //Kompozyt
 class Composite {
-    val Teams = ArrayList<Team>()
+    val Teams = ArrayList<Player>()
 
-    public fun add(team : Team){
+    fun add(team : Player) {
         this.Teams.add(team)
     }
 
-    public fun getPoints(id : Int) : Int{
+    fun isExist(team : Player) : Int {
+        var idx = 0
+        while(idx != Teams.count()) {
+            if(Teams[idx++].nickPlayer == team.nickPlayer) {
+                return 1
+            }
+        }
+        return 0
+    }
+
+    fun getPoints(id : Int) : Int {
         return Teams[id].points
     }
 }

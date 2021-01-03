@@ -23,6 +23,7 @@ class MenuClass : AppCompatActivity() {
                 observer.text = "Nie ma tylu zaznaczonych piosenek w bazie danych!"
                 return@setOnClickListener
             }
+            StartPlay.playWithFriends = false
             val intent = Intent(this, StartPlay::class.java)
             startActivity(intent)
         }
@@ -35,7 +36,7 @@ class MenuClass : AppCompatActivity() {
                 observer.text = "Nie ma tylu zaznaczonych piosenek w bazie danych!"
                 return@setOnClickListener
             }
-            val intent = Intent(this, playWithFriends::class.java)
+            val intent = Intent(this, HowManyPlayers::class.java)
             startActivity(intent)
         }
 

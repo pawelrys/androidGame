@@ -1,19 +1,17 @@
 package com.example.znamto
 
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.os.SystemClock
 import android.view.View
 import android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.start_play.*
-import org.w3c.dom.Text
 
 
 @Suppress("DEPRECATION")
@@ -23,6 +21,11 @@ class StartPlay : AppCompatActivity() {
         var howManySongsForRound = 10
         var knowSongs : Int = 0
         var allSongs : Int = 0
+
+        var composite = Composite()
+        var playWithFriends = false
+        var howManyPlayers = 0
+        var nowPlay = 0
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.hide()
@@ -36,27 +39,61 @@ class StartPlay : AppCompatActivity() {
         val iterator = songsToShow.createIterator()
         val animation = AnimationUtils.loadAnimation(this, R.anim.fadein)
         val startPlayText = findViewById<TextView>(R.id.startPlayText)
-        Handler().postDelayed({
-            startPlayText.text = "3"
-            startPlayText.startAnimation(animation)
+
+        if(playWithFriends == false) {
             Handler().postDelayed({
-                startPlayText.text = "2"
+                startPlayText.text = "3"
                 startPlayText.startAnimation(animation)
                 Handler().postDelayed({
-                    startPlayText.text = "1"
+                    startPlayText.text = "2"
                     startPlayText.startAnimation(animation)
                     Handler().postDelayed({
-                        startPlayText.text = "Go!"
+                        startPlayText.text = "1"
                         startPlayText.startAnimation(animation)
-                        knowSongs= 0
-                        allSongs= 0
-                        showSong(iterator)
                         Handler().postDelayed({
-                        }, 500)
+                            startPlayText.text = "Go!"
+                            startPlayText.startAnimation(animation)
+                            knowSongs = 0
+                            allSongs = 0
+                            showSongWithoutFriends(iterator)
+                            Handler().postDelayed({
+                            }, 500)
+                        }, 1000)
                     }, 1000)
                 }, 1000)
             }, 1000)
-        }, 1000)
+        } else {
+            Handler().postDelayed({
+                startPlayText.text = "Teraz zgaduje ${composite.Teams[nowPlay].nickPlayer}!"
+                Handler().postDelayed({
+                    startPlayText.text = "3"
+                    startPlayText.startAnimation(animation)
+                    Handler().postDelayed({
+                        startPlayText.text = "2"
+                        startPlayText.startAnimation(animation)
+                        Handler().postDelayed({
+                            startPlayText.text = "1"
+                            startPlayText.startAnimation(animation)
+                            Handler().postDelayed({
+                                startPlayText.text = "Go!"
+                                startPlayText.startAnimation(animation)
+                                knowSongs = 0
+                                allSongs = 0
+                                showSongWithFriends(iterator)
+                                Handler().postDelayed({
+                                }, 500)
+                            }, 1000)
+                        }, 1000)
+                    }, 1000)
+                }, 2000)
+            }, 1000)
+        }
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MenuClass::class.java)
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        startActivity(intent)
     }
 
     fun randomSongs() : SongsListCollection {
@@ -65,7 +102,7 @@ class StartPlay : AppCompatActivity() {
         return songs
     }
 
-    fun showSong(iterator : SongsListCollection.ListIterator) {
+    fun showSongWithoutFriends(iterator : SongsListCollection.ListIterator) {
         if(!iterator.isNull()) {
             val song = iterator.next()
             val animation = AnimationUtils.loadAnimation(this, R.anim.fadein)
@@ -81,9 +118,11 @@ class StartPlay : AppCompatActivity() {
 
             val timer: CountDownTimer = object : CountDownTimer(timeToSong, 1000) {
                 override fun onFinish() {
+                    allSongs++
+                    howManySong.text = ("$knowSongs/$allSongs")
                     cancel()
                     Handler().postDelayed({
-                        showSong(iterator)
+                        showSongWithoutFriends(iterator)
                     }, 500)
                 }
 
@@ -92,22 +131,14 @@ class StartPlay : AppCompatActivity() {
                 }
             }.start()
 
-//            screen.setOnClickListener {
-//                timer.onFinish()
-//            }
-
-            know.setOnClickListener {
+            know.clickWithDebounce {
                 knowSongs++
-                allSongs++
                 startPlayText.text = "Brawo!"
-                howManySong.text = ("$knowSongs/$allSongs")
                 timer.onFinish()
             }
 
-            dontKnow.setOnClickListener {
-                allSongs++
+            dontKnow.clickWithDebounce {
                 startPlayText.text = "Następnym razem się uda!"
-                howManySong.text = ("$knowSongs/$allSongs")
                 timer.onFinish()
             }
         }
@@ -117,6 +148,81 @@ class StartPlay : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+
+    fun showSongWithFriends(iterator : SongsListCollection.ListIterator) {
+        if(!iterator.isNull()) {
+            val song = iterator.next()
+            val animation = AnimationUtils.loadAnimation(this, R.anim.fadein)
+            val startPlayText = findViewById<TextView>(R.id.startPlayText)
+            val startPlayAuthorText = findViewById<TextView>(R.id.startPlayAuthorText)
+            startPlayText.text = song.titleSong
+            startPlayText.startAnimation(animation)
+            startPlayAuthorText.text = Adapter.getAuthor(song.authorSong)
+            startPlayAuthorText.startAnimation(animation)
+            val howManySong = findViewById<TextView>(R.id.howManyKnowSong)
+            val know = findViewById<LinearLayout>(R.id.know)
+            val dontKnow = findViewById<LinearLayout>(R.id.dontKnow)
+
+            val timer: CountDownTimer = object : CountDownTimer(timeToSong, 1000) {
+                override fun onFinish() {
+                    allSongs++
+                    howManySong.text = ("$knowSongs/$allSongs")
+                    cancel()
+                    Handler().postDelayed({
+                        showSongWithFriends(iterator)
+                    }, 500)
+                }
+
+                override fun onTick(millisUntilFinished: Long) {
+                    startPlayTimer.text = (millisUntilFinished / 1000).toString()
+                }
+            }.start()
+
+            know.clickWithDebounce {
+                knowSongs++
+                startPlayText.text = "Brawo!"
+                timer.onFinish()
+            }
+
+            dontKnow.clickWithDebounce {
+                startPlayText.text = "Następnym razem się uda!"
+                timer.onFinish()
+            }
+        }
+        else {
+            allSongs = 0
+            knowSongs = 0
+            nowPlay += 1
+            nowPlay %= howManyPlayers
+            howManyPlayers = TypePlayerName.howManyPlayers
+            playWithFriends = true
+            val intent = Intent(this, StartPlay::class.java)
+            startActivity(intent)
+        }
+    }
+
+
+    fun View.clickWithDebounce(debounceTime: Long = 1000L, action: () -> Unit) {
+        this.setOnClickListener(object : View.OnClickListener {
+            private var lastClickTime: Long = 0
+
+            override fun onClick(v: View) {
+                if (SystemClock.elapsedRealtime() - lastClickTime < debounceTime) return
+                else action()
+
+                lastClickTime = SystemClock.elapsedRealtime()
+            }
+        })
+    }
+
+
+
+
+
+
+
+
 
 //    //add hide navigation bar
     override fun onWindowFocusChanged(hasFocus: Boolean) {

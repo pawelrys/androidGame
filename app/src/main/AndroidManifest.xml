@@ -13,11 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AllSongsPage"></activity>
+        <activity android:name=".TypePlayerName"></activity>
+        <activity android:name=".AllSongsPage" />
         <activity android:name=".FilterSongsData" />
         <activity android:name=".AddNewSong" />
         <activity android:name=".Settings" />
-        <activity android:name=".playWithFriends" />
+        <activity android:name=".HowManyPlayers" />
         <activity
             android:name=".MenuClass"
             android:screenOrientation="portrait"

@@ -28,5 +28,8 @@
     <string name="songAuthor">Wykonawca</string>
     <string name="songCategory">Gatunek</string>
     <string name="songLanguage">Język</string>
+    <string name="howManyPlayersText">Ile graczy?</string>
+    <string name="howManyPlayersButton">Zatwierdź liczbę graczy</string>
+    <string name="typePlayersNameButton">Zatwierdź nazwę gracza</string>
 
 </resources>
